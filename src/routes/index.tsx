@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, Sparkles } from "lucide-react";
-import universeImage from "@/assets/africafun-deux-univers.jpeg.asset.json";
-import zemzemImage from "@/assets/sam-zemidjan.jpg";
-import tresorsStatues from "@/assets/tresors-statues.jpg.asset.json";
-import tresorsPorte from "@/assets/tresors-porte.jpg.asset.json";
+import { ArrowDown, ArrowRight } from "lucide-react";
+import universeImage from "@/assets/aaa-deux-univers.jpeg.asset.json";
+import zemzemImage from "@/assets/zemzem-course-tresors.jpeg.asset.json";
+import tresorRoyalImage from "@/assets/tresor-tabouret-royal.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -282,9 +281,12 @@ function nodeById(id: string) {
 
 // ---------- Composants ----------
 
-function AaaMark({ className = "", tone = "sun" }: { className?: string; tone?: "sun" | "navy" | "cream" }) {
-  const color = tone === "sun" ? "text-sun" : tone === "navy" ? "text-navy" : "text-cream";
-  return <span className={`font-display font-bold tracking-tight ${color} ${className}`}>AAA</span>;
+function AaaMark({ className = "" }: { className?: string }) {
+  return (
+    <span className={`font-display font-bold ${className}`} aria-label="AAA">
+      <span className="text-forest-bright">A</span><span className="text-sun">A</span><span className="text-red">A</span>
+    </span>
+  );
 }
 
 function SectionKicker({ children, tone = "" }: { children: React.ReactNode; tone?: string }) {
@@ -497,13 +499,13 @@ function AgentExplorer() {
         ))}
       </div>
       <article key={agent.id} className="animate-fade-in bg-paper p-6 text-navy shadow-soft sm:p-8">
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 border-b border-line pb-6">
+        <div className="grid gap-6 border-b border-line pb-6 sm:grid-cols-[minmax(0,1fr)_minmax(13rem,0.8fr)] sm:items-start">
           <div className="min-w-0">
             <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-forest">Intelligence {agent.number}</p>
             <h3 className="mt-2 font-display text-3xl leading-tight md:text-4xl">{agent.name}</h3>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-navy/70">{agent.mission}</p>
+            <p className="mt-3 max-w-xl text-justify text-sm leading-relaxed text-navy/70">{agent.mission}</p>
           </div>
-          <div className="shrink-0 text-right">
+          <div className="sm:text-right">
             <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-navy/45">Enveloppe</p>
             <p className="mt-1 font-display text-lg text-forest sm:text-xl">{agent.budget}</p>
           </div>
@@ -534,7 +536,7 @@ function Index() {
       <header className="absolute inset-x-0 top-0 z-20 border-b border-cream/20 text-cream">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
           <a href="#top" className="flex items-center gap-3" aria-label="Retour en haut">
-            <span className="grid size-11 place-items-center bg-sun font-display text-base font-bold text-navy">AAA</span>
+            <span className="grid size-11 grid-cols-3 place-items-center bg-ink font-display text-base font-bold" aria-label="AAA"><span className="text-forest-bright">A</span><span className="text-sun">A</span><span className="text-red">A</span></span>
             <span className="font-display text-lg font-semibold">Africafun <i className="font-normal text-sun">AI Agency</i></span>
           </a>
           <nav className="hidden gap-7 text-xs uppercase tracking-[0.16em] md:flex" aria-label="Navigation principale">
@@ -543,14 +545,14 @@ function Index() {
             <a href="#horizons" className="transition-colors hover:text-sun">Horizons</a>
             <a href="#univers" className="transition-colors hover:text-sun">Univers</a>
           </nav>
-          <a href="#contact" className="border border-cream/35 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-colors hover:bg-cream hover:text-navy">Échanger</a>
+          <span className="hidden w-11 md:block" aria-hidden="true" />
         </div>
       </header>
 
       <main id="top">
         {/* HERO */}
         <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-navy text-cream">
-          <img src={universeImage.url} alt="Les univers Zemzem et Les Trésors réunis entre Cotonou et un musée futuriste" className="absolute inset-0 size-full object-cover object-[58%_center] sm:object-center" />
+          <img src={universeImage.url} alt="Un conducteur de zemidjan et sa passagère reliés aux trésors d'un musée béninois" className="absolute inset-0 size-full object-cover object-center" />
           <div className="absolute inset-0 bg-hero-overlay" />
           <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-5 pb-12 pt-36 sm:px-8 md:pb-16 lg:grid-cols-12 lg:px-10">
             <div className="lg:col-span-9">
@@ -746,7 +748,7 @@ function Index() {
             <div className="grid gap-6 lg:grid-cols-12">
               <SectionKicker tone="lg:col-span-3">Mission culturelle</SectionKicker>
               <div className="lg:col-span-9">
-                <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Chaque projet est une nouvelle façon<br /><em className="text-forest">d'explorer le Bénin.</em></h2>
+                <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Chaque projet est une nouvelle façon <em className="text-forest">d'explorer le Bénin.</em></h2>
                 <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Les projets d'AAA sont des productions et des portes d'entrée complémentaires vers le Bénin.</p>
               </div>
             </div>
@@ -754,7 +756,7 @@ function Index() {
             <div className="mt-14 grid gap-5 md:grid-cols-2">
               {/* Zemzem */}
               <article className="group relative min-h-[640px] overflow-hidden bg-sun">
-                <img src={zemzemImage} alt="Sam, conducteur de zemidjan, et sa passagère dans les rues de Cotonou" className="absolute inset-0 size-full object-cover object-left transition-transform duration-700 group-hover:scale-[1.025]" />
+                <img src={zemzemImage.url} alt="Le conducteur de zemidjan lancé dans une course avec un cavalier et des œuvres échappées du musée" className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.025]" />
                 <div className="absolute inset-0 bg-card-overlay" />
                 <div className="absolute inset-x-0 bottom-0 p-7 text-cream md:p-9">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sun">Le Bénin que l'on vit · Comédie visuelle · Cotonou</p>
@@ -769,10 +771,7 @@ function Index() {
 
               {/* Les Trésors */}
               <article className="group relative min-h-[640px] overflow-hidden bg-navy">
-                <div className="absolute inset-0 grid grid-cols-[1.4fr_0.8fr] gap-1 bg-navy">
-                  <img src={tresorsStatues.url} alt="Trois statues royales historiques exposées au musée" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
-                  <img src={tresorsPorte.url} alt="Porte royale sculptée du royaume du Dahomey" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
-                </div>
+                <img src={tresorRoyalImage.url} alt="Tabouret royal africain présenté dans un musée" className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.025]" />
                 <div className="absolute inset-0 bg-card-overlay" />
                 <div className="absolute inset-x-0 bottom-0 p-7 text-cream md:p-9">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sun">Le Bénin que l'on découvre · Aventure · Histoire · Science-fiction</p>
@@ -821,14 +820,13 @@ function Index() {
 
         {/* POSITIONNEMENT FINAL / CONTACT */}
         <section id="contact" className="relative overflow-hidden bg-sun py-24 lg:py-32">
-          <Sparkles className="absolute right-[8%] top-16 text-red/30" size={84} />
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
             <p className="font-display text-3xl font-bold md:text-4xl">AFRICAFUN AI AGENCY</p>
             <p className="mt-5 max-w-4xl font-display text-2xl leading-snug text-navy md:text-3xl">Une agence créative augmentée par l'intelligence artificielle, qui explore le Bénin pour mieux raconter l'Afrique au monde.</p>
             <div className="mt-10 grid gap-10 lg:grid-cols-12">
               <div className="lg:col-span-9">
                 <div className="flex items-center gap-4">
-                  <AaaMark tone="navy" className="text-6xl md:text-7xl" />
+                  <AaaMark className="text-6xl md:text-7xl" />
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-navy">Africafun · AI · Agency</p>
                     <p className="mt-2 max-w-xl text-sm leading-relaxed text-navy/70">Une petite équipe. Une grande capacité de création. Transformer une idée en univers, un univers en œuvres et des œuvres en communautés.</p>
@@ -843,7 +841,7 @@ function Index() {
       <footer className="bg-navy text-cream">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 px-5 py-10 sm:px-8 md:flex-row md:items-center lg:px-10">
           <div className="flex items-center gap-4">
-            <span className="grid size-11 place-items-center bg-sun font-display text-sm font-bold text-navy">AAA</span>
+            <span className="grid size-11 grid-cols-3 place-items-center bg-ink font-display text-sm font-bold" aria-label="AAA"><span className="text-forest-bright">A</span><span className="text-sun">A</span><span className="text-red">A</span></span>
             <p className="font-display text-2xl">Africafun <i className="text-sun">AI Agency</i></p>
           </div>
           <p className="text-[10px] uppercase tracking-[0.2em] text-cream/55">Cotonou · Bénin · Création humaine augmentée</p>
