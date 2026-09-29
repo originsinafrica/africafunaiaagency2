@@ -1,8 +1,8 @@
 # Roadmap
 
-- [ ] Mettre l’illustration des deux univers en valeur dès l’ouverture
-- [ ] Intégrer les deux nouvelles photos des Trésors
-- [ ] Recomposer le cercle 3 en expérience interactive et synthétique
-- [ ] Alléger les horizons et corriger 90 jours / 9 mois partout
-- [ ] Appliquer les retouches éditoriales précédentes et retirer le bouton de conversation
+- [ ] Corriger l’alignement de la fiche 04 du Cercle 3
+- [ ] Remplacer les visuels d’ouverture, Zemzem et Les Trésors
+- [ ] Mettre la phrase de Mission culturelle dans la continuité
+- [ ] Passer à une palette noire, rouge, jaune et verte
+- [ ] Colorer les trois A du logo et retirer « Échanger » et l’étoile
 - [ ] Vérifier la page sur ordinateur et mobile
