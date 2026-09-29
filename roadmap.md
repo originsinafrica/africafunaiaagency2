@@ -6,3 +6,8 @@
 - [x] Passer à une palette noire, rouge, jaune et verte
 - [x] Colorer les trois A du logo et retirer « Échanger »
 - [x] Vérifier la page sur ordinateur et mobile
+- [x] Remplacer le visuel Zemzem par le taxi-moto faisant une grimace
+- [x] Améliorer la lisibilité des encadrés Zemzem et Les Trésors
+- [x] Retirer AAA des fiches conseillers et harmoniser la fiche de Fleur
+- [x] Remplacer le visuel « Un même pays » par les trois statues
+- [ ] Vérifier les nouvelles retouches sur ordinateur et mobile

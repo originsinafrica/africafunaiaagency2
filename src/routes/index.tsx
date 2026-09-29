@@ -2,7 +2,8 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import universeImage from "@/assets/aaa-deux-univers.jpeg.asset.json";
-import zemzemImage from "@/assets/zemzem-course-tresors.jpeg.asset.json";
+import zemzemImage from "@/assets/zemidjan-grimace.jpeg.asset.json";
+import statuesImage from "@/assets/statues-en-fuite.jpeg.asset.json";
 import tresorRoyalImage from "@/assets/tresor-tabouret-royal.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -38,11 +39,10 @@ const talents = [
   },
   {
     id: "fleur",
-    name: "Fleur",
+    name: "Fleur (profil fictif)",
     role: "Community & Social Media",
     domains: "Distribution, réseaux sociaux, communautés, relation avec le public, apprentissage numérique.",
     short: "Elle relie les œuvres aux plateformes et aux communautés, avec un regard humain.",
-    badge: "Jeune talent en formation",
   },
 ];
 
@@ -589,11 +589,10 @@ function Index() {
             <div className="mt-12 grid gap-5 md:grid-cols-3">
               {talents.map((talent, i) => (
                 <article key={talent.id} className="flex flex-col border-t-4 border-forest bg-canvas p-6 shadow-soft">
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start">
                     <span className="text-xs font-semibold text-forest">0{i + 1}</span>
-                    {talent.badge && <span className="max-w-[9rem] bg-sun px-2 py-1 text-right text-[8px] font-bold uppercase tracking-[0.12em]">{talent.badge}</span>}
                   </div>
-                  <h3 className="mt-9 font-display text-3xl">{talent.name}</h3>
+                  <h3 className="mt-9 min-h-[4.5rem] font-display text-3xl leading-tight">{talent.name}</h3>
                   <p className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-forest">{talent.role}</p>
                   <p className="mt-5 text-sm leading-relaxed text-navy/70">{talent.short}</p>
                   <p className="mt-6 border-t border-line pt-4 text-xs leading-relaxed text-navy/60">{talent.domains}</p>
@@ -618,7 +617,6 @@ function Index() {
                 <article key={adviser.id} className="bg-navy p-7 text-cream">
                   <div className="flex items-center justify-between">
                     <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-sun">Conseiller 0{i + 1} · {adviser.role}</p>
-                    <span className="grid size-8 place-items-center border border-sun/50 font-display text-xs text-sun">AAA</span>
                   </div>
                   <h3 className="mt-8 font-display text-3xl">{adviser.name}</h3>
                   <p className="mt-4 text-sm leading-relaxed text-cream/70">{adviser.domains}</p>
@@ -755,10 +753,9 @@ function Index() {
 
             <div className="mt-14 grid gap-5 md:grid-cols-2">
               {/* Zemzem */}
-              <article className="group relative min-h-[640px] overflow-hidden bg-sun">
-                <img src={zemzemImage.url} alt="Le conducteur de zemidjan lancé dans une course avec un cavalier et des œuvres échappées du musée" className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.025]" />
-                <div className="absolute inset-0 bg-card-overlay" />
-                <div className="absolute inset-x-0 bottom-0 p-7 text-cream md:p-9">
+              <article className="group relative min-h-[680px] overflow-hidden bg-sun">
+                <img src={zemzemImage.url} alt="Un conducteur de zemidjan faisant une grimace dans un marché de Cotonou" className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.025]" />
+                <div className="absolute inset-x-0 bottom-0 bg-ink/90 p-7 text-cream backdrop-blur-sm md:p-9">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sun">Le Bénin que l'on vit · Comédie visuelle · Cotonou</p>
                   <h3 className="font-display text-5xl">Zemzem</h3>
                   <p className="mt-3 max-w-md leading-relaxed text-cream/80">Sam transforme chaque course en aventure. Un héros populaire, un humour physique et une ville pleine de mouvement.</p>
@@ -770,10 +767,9 @@ function Index() {
               </article>
 
               {/* Les Trésors */}
-              <article className="group relative min-h-[640px] overflow-hidden bg-navy">
+              <article className="group relative min-h-[680px] overflow-hidden bg-navy">
                 <img src={tresorRoyalImage.url} alt="Tabouret royal africain présenté dans un musée" className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.025]" />
-                <div className="absolute inset-0 bg-card-overlay" />
-                <div className="absolute inset-x-0 bottom-0 p-7 text-cream md:p-9">
+                <div className="absolute inset-x-0 bottom-0 bg-ink/90 p-7 text-cream backdrop-blur-sm md:p-9">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sun">Le Bénin que l'on découvre · Aventure · Histoire · Science-fiction</p>
                   <h3 className="font-display text-5xl">Les Trésors</h3>
                   <p className="mt-3 max-w-md leading-relaxed text-cream/80">Les trésors royaux s'éveillent la nuit. Chaque objet devient une voix et un passage vers l'histoire.</p>
@@ -787,8 +783,8 @@ function Index() {
 
             {/* Centre commun */}
             <div className="relative mt-5 overflow-hidden">
-              <img src={universeImage.url} alt="Les deux univers AAA réunis" className="h-72 w-full object-cover md:h-96" />
-              <div className="absolute inset-0 bg-hero-overlay flex items-center justify-center text-center px-6">
+              <img src={statuesImage.url} alt="Trois statues royales s'échappant d'un musée" className="h-[30rem] w-full object-cover object-center md:h-[38rem]" />
+              <div className="absolute inset-0 flex items-end justify-center bg-card-overlay px-6 pb-8 text-center md:pb-12">
                 <div>
                   <p className="font-display text-3xl leading-tight text-cream md:text-5xl">Un même pays.<br /><span className="text-sun">Des milliers de façons de le découvrir.</span></p>
                   <div className="mt-7 flex flex-wrap items-center justify-center gap-3 font-display text-xl md:text-2xl">
@@ -819,7 +815,7 @@ function Index() {
         </section>
 
         {/* POSITIONNEMENT FINAL / CONTACT */}
-        <section id="contact" className="relative overflow-hidden bg-sun py-24 lg:py-32">
+        <section id="contact" className="relative overflow-hidden bg-paper py-24 lg:py-32">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
             <p className="font-display text-3xl font-bold md:text-4xl">AFRICAFUN AI AGENCY</p>
             <p className="mt-5 max-w-4xl font-display text-2xl leading-snug text-navy md:text-3xl">Une agence créative augmentée par l'intelligence artificielle, qui explore le Bénin pour mieux raconter l'Afrique au monde.</p>
