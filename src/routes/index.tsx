@@ -484,8 +484,8 @@ function Constellation() {
 // ---------- Agent fiche ----------
 
 function AgentExplorer() {
-  const [activeId, setActiveId] = useState(agents[0].id);
-  const agent = agents.find((item) => item.id === activeId) ?? agents[0];
+  const [activeId, setActiveId] = useState(agents[0]!.id);
+  const agent = agents.find((item) => item.id === activeId) ?? agents[0]!;
   return (
     <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.35fr)]">
       <div className="grid grid-cols-2 gap-px bg-cream/15 sm:grid-cols-4 lg:grid-cols-2">
