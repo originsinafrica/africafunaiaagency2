@@ -41,20 +41,24 @@
   --color-sky: var(--sky);
   --color-line: var(--line);
   --color-blue-glow: var(--blue-glow);
+  --color-ink: var(--ink);
+  --color-forest-bright: var(--forest-bright);
 }
 
 :root {
-  --canvas: oklch(0.965 0.018 91);
-  --paper: oklch(0.992 0.007 90);
+  --canvas: oklch(0.94 0.014 91);
+  --paper: oklch(0.975 0.009 90);
   --cream: oklch(0.97 0.018 91);
-  --navy: oklch(0.19 0.055 252);
-  --forest: oklch(0.39 0.11 154);
+  --navy: oklch(0.13 0.018 145);
+  --ink: oklch(0.085 0.01 145);
+  --forest: oklch(0.36 0.11 151);
+  --forest-bright: oklch(0.66 0.18 145);
   --sun: oklch(0.82 0.17 89);
   --sun-soft: oklch(0.94 0.07 91);
   --red: oklch(0.58 0.2 30);
-  --sky: oklch(0.78 0.13 223);
+  --sky: oklch(0.66 0.18 145);
   --line: oklch(0.78 0.025 85);
-  --blue-glow: oklch(0.28 0.08 240);
+  --blue-glow: oklch(0.19 0.025 145);
   --radius: 0.25rem;
   --background: var(--canvas);
   --foreground: var(--navy);
@@ -94,7 +98,7 @@
 }
 
 @utility bg-hero-overlay {
-  background: linear-gradient(90deg, color-mix(in oklab, var(--navy) 94%, transparent) 0%, color-mix(in oklab, var(--navy) 76%, transparent) 45%, color-mix(in oklab, var(--navy) 30%, transparent) 100%), linear-gradient(0deg, color-mix(in oklab, var(--navy) 80%, transparent), transparent 55%);
+  background: linear-gradient(90deg, color-mix(in oklab, var(--ink) 94%, transparent) 0%, color-mix(in oklab, var(--ink) 70%, transparent) 42%, color-mix(in oklab, var(--ink) 18%, transparent) 100%), linear-gradient(0deg, color-mix(in oklab, var(--ink) 86%, transparent), transparent 55%);
 }
 
 @utility bg-card-overlay {
