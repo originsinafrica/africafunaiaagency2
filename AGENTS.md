@@ -9,5 +9,6 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep the studio presentation as a single editorial scrolling route; the narrative depends on continuous chapter-to-chapter pacing.
-- Use the CDN pointer for the user-provided two-world illustration; it is the canonical visual for Zem Zem and Abomey.
+- Preserve the imported Africafun site as a single scrolling route because its navigation and storytelling are intentionally section-based.
+- Keep supplied site imagery in Lovable Asset pointers so the media remains project-scoped and lightweight.
+- Scope the Earth & Amber semantic color tokens to Cercle 3 and Message global so the rest of the imported palette remains unchanged.
