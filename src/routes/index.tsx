@@ -1,18 +1,23 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown, ArrowRight } from "lucide-react";
-import universeImage from "@/assets/aaa-deux-univers.jpeg.asset.json";
-import zemzemImage from "@/assets/zemidjan-grimace.jpeg.asset.json";
-import statuesImage from "@/assets/statues-en-fuite.jpeg.asset.json";
-import tresorRoyalImage from "@/assets/tresor-tabouret-royal.jpeg.asset.json";
+import universeAsset from "@/assets/sam-et-les-tresors.jpeg.asset.json";
+import zemzemAsset from "@/assets/sam.jpeg.asset.json";
+import statuesAsset from "@/assets/trois-statues.jpeg.asset.json";
+import tresorRoyalAsset from "@/assets/tabouret.jpeg.asset.json";
+
+const universeImage = universeAsset.url;
+const zemzemImage = zemzemAsset.url;
+const statuesImage = statuesAsset.url;
+const tresorRoyalImage = tresorRoyalAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "AAA — Africafun AI Agency · Agence créative augmentée par l'IA" },
-      { name: "description", content: "Africafun AI Agency (AAA) : une agence créative augmentée par l'intelligence artificielle. 3 talents, 3 conseillers et 8 intelligences IA pour explorer le Bénin et raconter l'Afrique au monde." },
+      { name: "description", content: "Africafun AI Agency (AAA) : une agence créative augmentée par l'intelligence artificielle. 3 opérationnels, 3 conseillers et 8 intelligences IA pour explorer le Bénin et raconter l'Afrique au monde." },
       { property: "og:title", content: "AAA — Africafun AI Agency · Agence créative augmentée" },
-      { property: "og:description", content: "Une agence créative augmentée par l'IA : 3 talents opérationnels, 3 conseillers et 8 intelligences spécialisées. Une équipe. Une intelligence collective. Une agence." },
+      { property: "og:description", content: "Une agence créative augmentée par l'IA : 3 opérationnels, 3 conseillers et 8 intelligences spécialisées. Une équipe. Une intelligence collective. Une agence." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -239,17 +244,17 @@ const advisorAngles = [60, 180, 300];
 const agentAngles = [22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5];
 
 const cTalents = talents.map((t, i) => {
-  const [x, y] = polar(200, talentAngles[i]!);
-  return { ...t, kind: "talent" as NodeKind, id: t.id, label: t.name, sub: t.role, blurb: t.short, x, y };
+  const [x, y] = polar(320, advisorAngles[i] ?? 0);
+  return { ...t, kind: "talent" as NodeKind, id: t.id, label: t.id === "fleur" ? "Fleur" : t.name, sub: t.role, blurb: t.short, x, y };
 });
 
 const cAdvisers = advisers.map((a, i) => {
-  const [x, y] = polar(320, advisorAngles[i]!);
+  const [x, y] = polar(200, talentAngles[i] ?? 0);
   return { ...a, kind: "advisor" as NodeKind, id: a.id, label: a.name, sub: a.role, blurb: a.domains, x, y };
 });
 
 const cAgents = agents.map((a, i) => {
-  const [x, y] = polar(440, agentAngles[i]!);
+  const [x, y] = polar(440, agentAngles[i] ?? 0);
   return { ...a, kind: "agent" as NodeKind, id: a.id, label: a.name, sub: `Agent ${a.number}`, blurb: a.mission, x, y };
 });
 
@@ -263,7 +268,7 @@ const coreNode: CNode = {
   y: CY,
 };
 
-const allNodes: CNode[] = [coreNode, ...cTalents, ...cAdvisers, ...cAgents];
+const allNodes: CNode[] = [coreNode, ...cAdvisers, ...cTalents, ...cAgents];
 
 const edges: [string, string][] = [
   ["core", "romeo"], ["core", "cesaire"], ["core", "fleur"],
@@ -276,7 +281,7 @@ const edges: [string, string][] = [
 ];
 
 function nodeById(id: string) {
-  return allNodes.find((n) => n.id === id)!;
+  return allNodes.find((n) => n.id === id) ?? coreNode;
 }
 
 // ---------- Composants ----------
@@ -305,21 +310,22 @@ function Constellation() {
   const activeConnected = activeId ? [...new Set(activeEdges.flat())].filter((id) => id !== activeId).map(nodeById) : [];
 
   return (
-    <section id="constellation" className="border-y border-line bg-navy py-24 text-cream lg:py-32">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+    <section id="constellation" className="relative overflow-hidden border-y border-line bg-cosmos py-20 text-cream sm:py-24 lg:py-32">
+      <div className="network-grid absolute inset-0 opacity-35" />
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <div className="grid gap-6 lg:grid-cols-12">
           <SectionKicker tone="text-sky lg:col-span-3">Architecture collaborative</SectionKicker>
           <div className="lg:col-span-9">
             <h2 className="font-display text-5xl leading-[0.95] md:text-7xl">Chaque force se relie.<br /><em className="text-sun">La création circule.</em></h2>
-            <p className="mt-6 max-w-2xl leading-relaxed text-cream/70">Une constellation vivante : chaque personne se relie à plusieurs intelligences, chaque agent sert plusieurs talents et chaque conseiller collabore avec plusieurs fonctions. Survolez la constellation, puis cliquez sur un élément pour ouvrir sa fiche.</p>
+            <p className="mt-6 max-w-2xl leading-relaxed text-cream/70">Une constellation vivante : les conseillers définissent le cap, les opérationnels accompagnent la vision et chaque intelligence sert plusieurs fonctions. <span className="hidden sm:inline">Survolez la constellation, puis cliquez sur un élément pour ouvrir sa fiche.</span><span className="sm:hidden">Touchez un élément pour ouvrir sa fiche.</span></p>
           </div>
         </div>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-12">
+        <div className="mt-10 grid gap-8 sm:mt-14 lg:grid-cols-12">
           <div className="lg:col-span-7 xl:col-span-8">
-            <div className="timeline-scroll overflow-x-auto pb-2">
-              <div className="mx-auto min-w-[640px] max-w-[860px]">
-                <svg viewBox="-150 -90 1300 1180" className="w-full" role="img" aria-label="Constellation AAA : 3 talents, 3 conseillers, 8 intelligences IA autour du centre AAA">
+            <div className="pb-2">
+              <div className="mx-auto w-full max-w-[860px]">
+                <svg viewBox="-150 -90 1300 1180" className="constellation-map w-full" role="img" aria-label="Constellation AAA : 3 opérationnels, 3 conseillers, 8 intelligences IA autour du centre AAA">
                   {/* Anneaux */}
                   {[200, 320, 440].map((r) => (
                     <circle key={r} cx={CX} cy={CY} r={r} fill="none" stroke="var(--sky)" strokeOpacity="0.18" strokeDasharray="2 10" />
@@ -362,11 +368,12 @@ function Constellation() {
                         onMouseLeave={() => setHovered(null)}
                         onClick={() => setActiveId((v) => (v === n.id ? null : n.id))}
                       >
+                        <circle className="constellation-hit" cx={n.x} cy={n.y} r={38} fill="transparent" />
                         {focusId === n.id && <circle cx={n.x} cy={n.y} r={26} fill="var(--sky)" fillOpacity="0.25" />}
                         <circle cx={n.x} cy={n.y} r={15} fill="var(--sky)" />
                         <text x={n.x} y={n.y + 4.5} textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--navy)" fontFamily="Space Grotesk, sans-serif">{n.number}</text>
                         {lines.map((line, li) => (
-                          <text key={li} x={tx} y={ty + li * 17} textAnchor={anchor} fontSize="14" fontWeight="600" fill="var(--cream)" fontFamily="Space Grotesk, sans-serif">{line}</text>
+                          <text className="constellation-label" key={li} x={tx} y={ty + li * 17} textAnchor={anchor} fontSize="14" fontWeight="600" fill="var(--cream)" fontFamily="Space Grotesk, sans-serif">{line}</text>
                         ))}
                       </g>
                     );
@@ -381,11 +388,11 @@ function Constellation() {
                       onMouseLeave={() => setHovered(null)}
                       onClick={() => setActiveId((v) => (v === n.id ? null : n.id))}
                     >
-                      {focusId === n.id && <circle cx={n.x} cy={n.y} r={36} fill="none" stroke="var(--sun)" strokeOpacity="0.6" />}
-                      <circle cx={n.x} cy={n.y} r={24} fill="var(--navy)" stroke="var(--sun)" strokeWidth="2" />
-                      <text x={n.x} y={n.y + 4} textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--sun)" fontFamily="Space Grotesk, sans-serif">{n.label.slice(0, 2).toUpperCase()}</text>
-                      <text x={n.x} y={n.y + 46} textAnchor="middle" fontSize="17" fontWeight="700" fill="var(--cream)" fontFamily="Fraunces, serif">{n.label}</text>
-                      <text x={n.x} y={n.y + 64} textAnchor="middle" fontSize="12" fill="var(--cream)" fillOpacity="0.6" fontFamily="Space Grotesk, sans-serif">{n.sub}</text>
+                      <circle className="constellation-hit" cx={n.x} cy={n.y} r={42} fill="transparent" />
+                      {focusId === n.id && <circle cx={n.x} cy={n.y} r={44} fill="var(--sun)" fillOpacity="0.2" />}
+                      <circle cx={n.x} cy={n.y} r={32} fill="var(--sun)" />
+                      <text className="constellation-label" x={n.x} y={n.y - 40} textAnchor="middle" fontSize="17" fontWeight="700" fill="var(--cream)" fontFamily="Fraunces, serif">{n.label}</text>
+                      <text className="constellation-label" x={n.x} y={n.y + 44} textAnchor="middle" fontSize="12" fill="var(--cream)" fillOpacity="0.6" fontFamily="Space Grotesk, sans-serif">{n.sub}</text>
                     </g>
                   ))}
 
@@ -398,27 +405,27 @@ function Constellation() {
                       onMouseLeave={() => setHovered(null)}
                       onClick={() => setActiveId((v) => (v === n.id ? null : n.id))}
                     >
-                      {focusId === n.id && <circle cx={n.x} cy={n.y} r={44} fill="var(--sun)" fillOpacity="0.2" />}
-                      <circle cx={n.x} cy={n.y} r={32} fill="var(--sun)" />
-                      <text x={n.x} y={n.y - 48} textAnchor="middle" fontSize="20" fontWeight="700" fill="var(--cream)" fontFamily="Fraunces, serif">{n.label}</text>
-                      <text x={n.x} y={n.y + 56} textAnchor="middle" fontSize="12" fill="var(--cream)" fillOpacity="0.65" fontFamily="Space Grotesk, sans-serif">{n.sub}</text>
+                      <circle className="constellation-hit" cx={n.x} cy={n.y} r={48} fill="transparent" />
+                      {focusId === n.id && <circle cx={n.x} cy={n.y} r={36} fill="var(--cream)" fillOpacity="0.18" />}
+                      <circle cx={n.x} cy={n.y} r={24} fill="var(--cream)" />
+                      <text className="constellation-label" x={n.x} y={n.y - 48} textAnchor="middle" fontSize="20" fontWeight="700" fill="var(--cream)" fontFamily="Fraunces, serif">{n.label}</text>
+                      <text className="constellation-label" x={n.x} y={n.y + 56} textAnchor="middle" fontSize="12" fill="var(--cream)" fillOpacity="0.65" fontFamily="Space Grotesk, sans-serif">{n.sub}</text>
                     </g>
                   ))}
 
                   {/* Centre AAA */}
                   <g className="cursor-pointer" onMouseEnter={() => setHovered("core")} onMouseLeave={() => setHovered(null)} onClick={() => setActiveId("core")}>
                     <circle cx={CX} cy={CY} r={92} fill="var(--sun)" fillOpacity={focusId === "core" || !focusId ? 1 : 0.5} />
-                    <text x={CX} y={CY - 8} textAnchor="middle" fontSize="44" fontWeight="700" fill="var(--navy)" fontFamily="Fraunces, serif">AAA</text>
-                    <text x={CX} y={CY + 22} textAnchor="middle" fontSize="12" letterSpacing="3" fill="var(--navy)" fillOpacity="0.8" fontFamily="Space Grotesk, sans-serif">AFRICAFUN AI AGENCY</text>
+                    <text x={CX} y={CY + 15} textAnchor="middle" fontSize="44" fontWeight="700" fill="var(--navy)" fontFamily="Fraunces, serif">AAA</text>
                   </g>
                 </svg>
 
-                <div className="mt-4 flex min-h-14 items-center justify-center text-center text-sm text-cream/70">
-                  <span>{focusId ? nodeById(focusId).blurb : "Survolez un élément pour lire son rôle — cliquez pour ouvrir sa fiche."}</span>
+                <div className="mt-1 flex min-h-14 items-center justify-center px-3 text-center text-sm text-cream/70 sm:mt-4">
+                  <span>{focusId ? nodeById(focusId).blurb : <><span className="hidden sm:inline">Survolez un élément pour lire son rôle — cliquez pour ouvrir sa fiche.</span><span className="sm:hidden">Touchez un cercle pour lire son rôle et ouvrir sa fiche.</span></>}</span>
                 </div>
                 <div className="mt-3 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.15em]">
-                  <span className="flex items-center gap-2"><i className="size-3 rounded-full bg-sun" /> Talents · l'action</span>
-                  <span className="flex items-center gap-2"><i className="size-3 rounded-full border-2 border-sun" /> Conseillers · le recul</span>
+                  <span className="flex items-center gap-2"><i className="size-3 rounded-full bg-sun" /> Conseillers · le cap</span>
+                  <span className="flex items-center gap-2"><i className="size-3 rounded-full bg-cream" /> Opérationnels · la construction</span>
                   <span className="flex items-center gap-2"><i className="size-3 rounded-full bg-sky" /> Intelligences IA · la capacité</span>
                 </div>
               </div>
@@ -427,12 +434,12 @@ function Constellation() {
 
           {/* Panneau de détail */}
           <aside className="lg:col-span-5 xl:col-span-4">
-            <div className="border border-cream/20 bg-blue-glow/60 p-6 lg:sticky lg:top-8">
+            <div className="border border-cream/20 bg-cosmos-deep/70 p-6 lg:sticky lg:top-8">
               {!active ? (
                 <div className="text-cream/70">
                   <SectionKicker tone="text-sun">Fiche d'un élément</SectionKicker>
                   <p className="mt-4 font-display text-2xl">Cliquez sur un nœud</p>
-                  <p className="mt-3 text-sm leading-relaxed">Talents, conseillers ou intelligences IA : chaque élément ouvre sa fiche — rôle, connexions et, pour les agents, enveloppe budgétaire.</p>
+                  <p className="mt-3 text-sm leading-relaxed">Opérationnels, conseillers ou intelligences IA : chaque élément ouvre sa fiche — rôle, connexions et, pour les agents, enveloppe budgétaire.</p>
                   <div className="mt-6 grid gap-2 text-xs">
                     <p className="text-cream/60">Exemples : cliquez sur <span className="text-sun">Roméo</span> pour voir ses 4 intelligences, sur <span className="text-sky">05</span> pour la fiche vidéo.</p>
                   </div>
@@ -442,7 +449,7 @@ function Constellation() {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-sun">
-                        {active.kind === "talent" ? "Talent opérationnel" : active.kind === "advisor" ? "Conseiller" : active.kind === "agent" ? `Intelligence IA · Agent ${active.sub}` : "Centre AAA"}
+                        {active.kind === "talent" ? "Opérationnel" : active.kind === "advisor" ? "Conseiller" : active.kind === "agent" ? `Intelligence IA · Agent ${active.sub}` : "Centre AAA"}
                       </p>
                       <h3 className="mt-2 font-display text-3xl">{active.label}</h3>
                       {active.kind !== "core" && <p className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-sky">{active.sub}</p>}
@@ -450,12 +457,12 @@ function Constellation() {
                     <button onClick={() => setActiveId(null)} className="text-cream/50 transition-colors hover:text-sun" aria-label="Fermer la fiche">✕</button>
                   </div>
                   <p className="mt-5 text-sm leading-relaxed text-cream/80">
-                    {active.kind === "core" ? active.blurb : active.kind === "agent" ? agents.find((a) => a.id === active.id)!.mission : (active as typeof cTalents[number]).domains}
+                    {active.kind === "core" ? active.blurb : active.kind === "agent" ? agents.find((a) => a.id === active.id)?.mission ?? active.blurb : (active as typeof cTalents[number]).domains}
                   </p>
                   {active.kind === "agent" && (
                     <div className="mt-4 border border-sky/30 bg-navy/60 px-4 py-3">
                       <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-sky">Enveloppe mensuelle estimative</p>
-                      <p className="mt-1 font-display text-xl text-cream">{agents.find((a) => a.id === active.id)!.budget}</p>
+                      <p className="mt-1 font-display text-xl text-cream">{agents.find((a) => a.id === active.id)?.budget ?? "À définir"}</p>
                     </div>
                   )}
                   {activeConnected.length > 0 && (
@@ -486,14 +493,16 @@ function Constellation() {
 // ---------- Agent fiche ----------
 
 function AgentExplorer() {
-  const [activeId, setActiveId] = useState(agents[0]!.id);
-  const agent = agents.find((item) => item.id === activeId) ?? agents[0]!;
+  const firstAgent = agents[0];
+  const [activeId, setActiveId] = useState(firstAgent?.id ?? "da");
+  const agent = agents.find((item) => item.id === activeId) ?? firstAgent;
+  if (!agent) return null;
   return (
     <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.35fr)]">
-      <div className="grid grid-cols-2 gap-px bg-cream/15 sm:grid-cols-4 lg:grid-cols-2">
+      <div className="grid grid-cols-2 gap-px bg-amber/20 sm:grid-cols-4 lg:grid-cols-2">
         {agents.map((item) => (
-          <button key={item.id} type="button" onClick={() => setActiveId(item.id)} aria-pressed={item.id === agent.id} className={`group min-h-28 p-4 text-left transition-colors ${item.id === agent.id ? "bg-sun text-navy" : "bg-blue-glow text-cream hover:bg-forest"}`}>
-            <span className={`font-display text-2xl ${item.id === agent.id ? "text-red" : "text-sky"}`}>{item.number}</span>
+          <button key={item.id} type="button" onClick={() => setActiveId(item.id)} aria-pressed={item.id === agent.id} className={`group min-h-28 p-4 text-left transition-colors ${item.id === agent.id ? "bg-terracotta text-earth-ink" : "bg-earth-panel text-cream hover:bg-amber hover:text-earth-ink"}`}>
+            <span className={`font-display text-2xl ${item.id === agent.id ? "text-cream" : "text-amber group-hover:text-earth-ink"}`}>{item.number}</span>
             <span className="mt-3 block text-sm font-semibold leading-snug">{item.name}</span>
           </button>
         ))}
@@ -501,24 +510,24 @@ function AgentExplorer() {
       <article key={agent.id} className="animate-fade-in bg-paper p-6 text-navy shadow-soft sm:p-8">
         <div className="grid gap-6 border-b border-line pb-6 sm:grid-cols-[minmax(0,1fr)_minmax(13rem,0.8fr)] sm:items-start">
           <div className="min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-forest">Intelligence {agent.number}</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-terracotta">Intelligence {agent.number}</p>
             <h3 className="mt-2 font-display text-3xl leading-tight md:text-4xl">{agent.name}</h3>
             <p className="mt-3 max-w-xl text-justify text-sm leading-relaxed text-navy/70">{agent.mission}</p>
           </div>
           <div className="sm:text-right">
             <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-navy/45">Enveloppe</p>
-            <p className="mt-1 font-display text-lg text-forest sm:text-xl">{agent.budget}</p>
+            <p className="mt-1 font-display text-lg text-terracotta sm:text-xl">{agent.budget}</p>
           </div>
         </div>
         <div className="mt-6 grid gap-7 sm:grid-cols-2">
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45">Responsabilités</p>
-            <ul className="mt-3 grid gap-2">{agent.duties.map((d) => <li key={d} className="flex items-start gap-2 text-sm text-navy/75"><span className="mt-2 size-1.5 shrink-0 bg-forest" />{d}</li>)}</ul>
+            <ul className="mt-3 grid gap-2">{agent.duties.map((d) => <li key={d} className="flex items-start gap-2 text-sm text-navy/75"><span className="mt-2 size-1.5 shrink-0 bg-amber" />{d}</li>)}</ul>
           </div>
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45">Dans le studio</p>
             <p className="mt-3 text-sm leading-relaxed text-navy/75">{agent.usageWho}</p>
-            <p className="mt-3 font-display text-lg text-forest">{agent.usageSteps}</p>
+            <p className="mt-3 font-display text-lg text-terracotta">{agent.usageSteps}</p>
           </div>
         </div>
         <div className="mt-6 flex flex-wrap gap-2">{agent.tools.map(([tool]) => <span key={tool} className="border border-line bg-canvas px-2.5 py-1.5 text-[10px] font-semibold uppercase text-navy/65">{tool}</span>)}</div>
@@ -533,11 +542,11 @@ function AgentExplorer() {
 function Index() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-canvas font-body text-navy selection:bg-sun selection:text-navy">
-      <header className="absolute inset-x-0 top-0 z-20 border-b border-cream/20 text-cream">
+      <header className="absolute inset-x-0 top-0 z-20 border-b border-line bg-paper/95 text-navy backdrop-blur-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
           <a href="#top" className="flex items-center gap-3" aria-label="Retour en haut">
-            <span className="grid size-11 grid-cols-3 place-items-center bg-ink font-display text-base font-bold" aria-label="AAA"><span className="text-forest-bright">A</span><span className="text-sun">A</span><span className="text-red">A</span></span>
-            <span className="font-display text-lg font-semibold">Africafun <i className="font-normal text-sun">AI Agency</i></span>
+            <span className="grid size-11 grid-cols-3 place-items-center font-display text-base font-bold" aria-label="AAA"><span className="text-forest">A</span><span className="text-sun">A</span><span className="text-red">A</span></span>
+            <span className="font-display text-lg font-semibold text-navy">Africafun <i className="font-normal text-sun">AI Agency</i></span>
           </a>
           <nav className="hidden gap-7 text-xs uppercase tracking-[0.16em] md:flex" aria-label="Navigation principale">
             <a href="#constellation" className="transition-colors hover:text-sun">Constellation</a>
@@ -552,7 +561,7 @@ function Index() {
       <main id="top">
         {/* HERO */}
         <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-navy text-cream">
-          <img src={universeImage.url} alt="Un conducteur de zemidjan et sa passagère reliés aux trésors d'un musée béninois" className="absolute inset-0 size-full object-cover object-center" />
+          <img src={universeImage} alt="Un conducteur de zemidjan et sa passagère reliés aux trésors d'un musée béninois" className="hero-visual absolute inset-0 size-full object-cover" />
           <div className="absolute inset-0 bg-hero-overlay" />
           <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-5 pb-12 pt-36 sm:px-8 md:pb-16 lg:grid-cols-12 lg:px-10">
             <div className="lg:col-span-9">
@@ -576,14 +585,36 @@ function Index() {
         {/* CONSTELLATION */}
         <Constellation />
 
-        {/* TALENTS */}
-        <section className="bg-canvas py-24 lg:py-32">
+        {/* CONSEILLERS */}
+        <section className="bg-paper py-24 lg:py-32">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
             <div className="grid gap-6 lg:grid-cols-12">
-              <SectionKicker tone="lg:col-span-3">Cercle 1 · Les talents</SectionKicker>
+              <SectionKicker tone="lg:col-span-3">Cercle 1 · Les conseillers</SectionKicker>
               <div className="lg:col-span-9">
-                <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Les humains donnent<br /><em className="text-forest">la direction.</em></h2>
-                <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Trois talents opérationnels prennent les décisions, portent la responsabilité et dirigent plusieurs intelligences au service de leur vision.</p>
+                <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Les forces d'orientation<br /><em className="text-forest">qui définissent le cap.</em></h2>
+              </div>
+            </div>
+            <div className="mt-12 grid gap-px bg-line md:grid-cols-3">
+              {advisers.map((adviser, i) => (
+                <article key={adviser.id} className="bg-navy p-7 text-cream">
+                  <div className="flex items-center justify-between">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-sun">Conseiller 0{i + 1} · {adviser.role}</p>
+                  </div>
+                  <h3 className="mt-8 font-display text-3xl">{adviser.name}</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-cream/70">{adviser.domains}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* TALENTS */}
+        <section id="operationnels" className="bg-canvas py-24 lg:py-32">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+            <div className="grid gap-6 lg:grid-cols-12">
+              <SectionKicker tone="lg:col-span-3">Cercle 2 · Les opérationnels</SectionKicker>
+              <div className="lg:col-span-9">
+                <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Des bâtisseurs<br /><em className="text-forest">qui accompagnent la vision.</em></h2>
               </div>
             </div>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -602,38 +633,14 @@ function Index() {
           </div>
         </section>
 
-        {/* CONSEILLERS */}
-        <section className="bg-paper py-24 lg:py-32">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-            <div className="grid gap-6 lg:grid-cols-12">
-              <SectionKicker tone="lg:col-span-3">Cercle 2 · Les conseillers</SectionKicker>
-              <div className="lg:col-span-9">
-                <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Des forces d'orientation<br /><em className="text-forest">et d'amplification.</em></h2>
-                <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Autour du système, les conseillers apportent le recul, l'expertise et l'orientation — et amplifient chaque action de l'équipe. Chacun peut intervenir sur plusieurs fonctions.</p>
-              </div>
-            </div>
-            <div className="mt-12 grid gap-px bg-line md:grid-cols-3">
-              {advisers.map((adviser, i) => (
-                <article key={adviser.id} className="bg-navy p-7 text-cream">
-                  <div className="flex items-center justify-between">
-                    <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-sun">Conseiller 0{i + 1} · {adviser.role}</p>
-                  </div>
-                  <h3 className="mt-8 font-display text-3xl">{adviser.name}</h3>
-                  <p className="mt-4 text-sm leading-relaxed text-cream/70">{adviser.domains}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* AGENTS IA — FICHES */}
-        <section id="agents" className="relative overflow-hidden bg-navy py-24 text-cream lg:py-32">
-          <div className="network-grid absolute inset-0 opacity-25" />
+        <section id="agents" className="relative overflow-hidden bg-earth-ink py-24 text-cream lg:py-32">
+          <div className="network-grid-earth absolute inset-0 opacity-30" />
           <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
             <div className="grid gap-6 lg:grid-cols-12">
-              <SectionKicker tone="text-sky lg:col-span-3">Cercle 3 · Infrastructure créative</SectionKicker>
+              <SectionKicker tone="text-amber lg:col-span-3">Cercle 3 · Infrastructure créative</SectionKicker>
               <div className="lg:col-span-9">
-                <h2 className="font-display text-5xl leading-none md:text-7xl">Huit intelligences.<br /><em className="text-sky">Une force orchestrée.</em></h2>
+                <h2 className="font-display text-5xl leading-none md:text-7xl">Huit intelligences.<br /><em className="text-amber">Une force orchestrée.</em></h2>
                 <p className="mt-6 max-w-2xl text-cream/70">Choisissez une intelligence pour découvrir sa mission, ses usages, ses outils et son enveloppe. Chaque outil alimente plusieurs fonctions du studio.</p>
               </div>
             </div>
@@ -753,38 +760,38 @@ function Index() {
 
             <div className="mt-14 grid gap-5 md:grid-cols-2">
               {/* Zem Zem */}
-              <article className="group relative min-h-[680px] overflow-hidden bg-sun">
-                <img src={zemzemImage.url} alt="Un conducteur de zemidjan faisant une grimace dans un marché de Cotonou" className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.025]" />
-                <div className="absolute inset-x-0 bottom-0 bg-ink/90 p-7 text-cream backdrop-blur-sm md:p-9">
+              <article className="group relative overflow-hidden bg-sun-soft md:min-h-[760px]">
+                <img src={zemzemImage} alt="Sam, conducteur de zemidjan, dans un marché de Cotonou" className="relative aspect-square w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.015] md:absolute md:inset-0 md:aspect-auto md:size-full md:object-contain" />
+                <div className="relative flex min-h-[370px] flex-col bg-ink/90 p-7 text-cream md:absolute md:inset-x-0 md:bottom-0 md:bg-ink/75 md:p-9">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sun">Le Bénin que l'on vit · Comédie visuelle · Cotonou</p>
                   <h3 className="font-display text-5xl">Zem Zem</h3>
-                  <p className="mt-3 max-w-md leading-relaxed text-cream/80">Sam transforme chaque course en aventure. Un héros populaire, un humour physique et une ville pleine de mouvement.</p>
+                  <p className="mt-3 min-h-12 leading-relaxed text-cream/85">Sam transforme chaque course en aventure. Un héros populaire, un humour physique et une ville pleine de mouvement.</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {["Vie quotidienne", "Beauté", "Simplicité", "Familles", "Villes et villages", "Humour", "Cuisine", "Traditions vivantes", "Relations humaines"].map((x) => <span key={x} className="border border-cream/30 bg-navy/40 px-2 py-1 text-[10px] text-cream/85">{x}</span>)}
                   </div>
-                  <blockquote className="mt-6 border-l-2 border-sun pl-4 font-display text-lg italic text-cream/90">« Zem Zem nous fait découvrir le Bénin de l'intérieur, à travers la vie de ceux qui l'habitent. »</blockquote>
+                  <blockquote className="mt-auto border-l-2 border-sun pl-4 pt-1 font-display text-lg italic text-cream/90">« Zem Zem nous fait découvrir le Bénin de l'intérieur, à travers la vie de ceux qui l'habitent. »</blockquote>
                 </div>
               </article>
 
               {/* Les Trésors */}
-              <article className="group relative min-h-[680px] overflow-hidden bg-navy">
-                <img src={tresorRoyalImage.url} alt="Tabouret royal africain présenté dans un musée" className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.025]" />
-                <div className="absolute inset-x-0 bottom-0 bg-ink/90 p-7 text-cream backdrop-blur-sm md:p-9">
+              <article className="group relative overflow-hidden bg-cosmos md:min-h-[760px]">
+                <img src={tresorRoyalImage} alt="Tabouret royal illuminé dans un espace patrimonial" className="relative aspect-square w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.015] md:absolute md:inset-0 md:aspect-auto md:size-full md:object-contain" />
+                <div className="relative flex min-h-[370px] flex-col bg-ink/90 p-7 text-cream md:absolute md:inset-x-0 md:bottom-0 md:bg-ink/75 md:p-9">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sun">Le Bénin que l'on découvre · Aventure · Histoire · Science-fiction</p>
                   <h3 className="font-display text-5xl">Les Trésors</h3>
-                  <p className="mt-3 max-w-md leading-relaxed text-cream/80">Les trésors royaux s'éveillent la nuit. Chaque objet devient une voix et un passage vers l'histoire.</p>
+                  <p className="mt-3 min-h-12 leading-relaxed text-cream/85">Les trésors royaux s'éveillent la nuit. Chaque objet devient une voix et un passage vers l'histoire.</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {["Histoire", "Royaumes", "Patrimoine", "Grandes figures", "Savoirs et sagesses", "Organisation", "Réalisations", "Héritages", "Systèmes de pensée", "Puissance historique"].map((x) => <span key={x} className="border border-cream/30 bg-navy/40 px-2 py-1 text-[10px] text-cream/85">{x}</span>)}
                   </div>
-                  <blockquote className="mt-6 border-l-2 border-sun pl-4 font-display text-lg italic text-cream/90">« Les Trésors révèlent la profondeur, la puissance historique et la grandeur du Bénin. »</blockquote>
+                  <blockquote className="mt-auto border-l-2 border-sun pl-4 pt-1 font-display text-lg italic text-cream/90">« Les Trésors révèlent la profondeur, la puissance historique et la grandeur du Bénin. »</blockquote>
                 </div>
               </article>
             </div>
 
             {/* Centre commun */}
-            <div className="relative mt-5 overflow-hidden">
-              <img src={statuesImage.url} alt="Trois statues royales s'échappant d'un musée" className="h-[30rem] w-full object-cover object-center md:h-[38rem]" />
-              <div className="absolute inset-0 flex items-end justify-center bg-card-overlay px-6 pb-8 text-center md:pb-12">
+            <div className="relative mt-5 overflow-hidden bg-ink">
+              <img src={statuesImage} alt="Trois statues royales s'échappant d'un musée" className="relative aspect-[1312/816] w-full object-contain md:h-[38rem] md:aspect-auto md:object-cover md:object-center" />
+              <div className="relative flex items-end justify-center bg-ink px-6 py-8 text-center md:absolute md:inset-0 md:bg-card-overlay md:pb-12 md:pt-0">
                 <div>
                   <p className="font-display text-3xl leading-tight text-cream md:text-5xl">Un même pays.<br /><span className="text-sun">Des milliers de façons de le découvrir.</span></p>
                   <div className="mt-7 flex flex-wrap items-center justify-center gap-3 font-display text-xl md:text-2xl">
@@ -802,13 +809,13 @@ function Index() {
         </section>
 
         {/* MESSAGE GLOBAL */}
-        <section className="bg-navy py-24 text-cream lg:py-32">
+        <section className="bg-earth-ink py-24 text-cream lg:py-32">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-            <SectionKicker tone="text-sun">Message global</SectionKicker>
-            <h2 className="mt-8 max-w-5xl font-display text-4xl leading-[1.05] md:text-6xl">Nous produisons des contenus qui ouvrent le regard.<br /><em className="text-sun">Nous construisons des façons de regarder.</em></h2>
-            <div className="mt-12 grid gap-px bg-cream/15 sm:grid-cols-2 lg:grid-cols-3">
-              {["Regarder le quotidien", "Comprendre l'histoire", "Découvrir les savoirs", "Explorer les cultures", "Créer de nouveaux imaginaires", "Partager avec le monde"].map((x, i) => (
-                <p key={x} className="bg-blue-glow p-6 font-display text-xl leading-snug md:text-2xl"><span className="mr-3 text-xs font-bold text-sky">0{i + 1}</span>{x}</p>
+            <SectionKicker tone="text-terracotta">Message global</SectionKicker>
+            <h2 className="mt-8 max-w-5xl font-display text-4xl leading-[1.05] md:text-6xl">Nous produisons des contenus qui ouvrent le regard.<br /><em className="text-terracotta">Nous construisons des façons de regarder.</em></h2>
+            <div className="mt-12 grid gap-px bg-amber/20 sm:grid-cols-2 lg:grid-cols-3">
+              {["Regarder le quotidien", "Comprendre l'histoire", "Valoriser les savoirs", "Explorer les cultures", "Créer des imaginaires", "Partager avec le monde"].map((x, i) => (
+                <p key={x} className="bg-earth-panel p-6 font-display text-xl leading-snug md:text-2xl"><span className="mr-3 text-xs font-bold text-amber">0{i + 1}</span>{x}</p>
               ))}
             </div>
           </div>
