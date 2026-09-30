@@ -206,7 +206,7 @@ const agents = [
 
 const timeline = [
   ["Jours 1–30", "Assembler", "Équipe, outils et méthodes"],
-  ["Jours 31–60", "Produire", "Premiers contenus Zemzem et Les Trésors"],
+  ["Jours 31–60", "Produire", "Premiers contenus Zem Zem et Les Trésors"],
   ["Jours 61–90", "Apprendre", "Mesurer, ajuster et formaliser"],
   ["Mois 4–6", "Affirmer", "Portfolio, signature et communauté"],
   ["Mois 7–9", "Devenir la référence", "Projets forts, collaborations et crédibilité"],
@@ -752,17 +752,17 @@ function Index() {
             </div>
 
             <div className="mt-14 grid gap-5 md:grid-cols-2">
-              {/* Zemzem */}
+              {/* Zem Zem */}
               <article className="group relative min-h-[680px] overflow-hidden bg-sun">
                 <img src={zemzemImage.url} alt="Un conducteur de zemidjan faisant une grimace dans un marché de Cotonou" className="absolute inset-0 size-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.025]" />
                 <div className="absolute inset-x-0 bottom-0 bg-ink/90 p-7 text-cream backdrop-blur-sm md:p-9">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sun">Le Bénin que l'on vit · Comédie visuelle · Cotonou</p>
-                  <h3 className="font-display text-5xl">Zemzem</h3>
+                  <h3 className="font-display text-5xl">Zem Zem</h3>
                   <p className="mt-3 max-w-md leading-relaxed text-cream/80">Sam transforme chaque course en aventure. Un héros populaire, un humour physique et une ville pleine de mouvement.</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {["Vie quotidienne", "Beauté", "Simplicité", "Familles", "Villes et villages", "Humour", "Cuisine", "Traditions vivantes", "Relations humaines"].map((x) => <span key={x} className="border border-cream/30 bg-navy/40 px-2 py-1 text-[10px] text-cream/85">{x}</span>)}
                   </div>
-                  <blockquote className="mt-6 border-l-2 border-sun pl-4 font-display text-lg italic text-cream/90">« Zemzem nous fait découvrir le Bénin de l'intérieur, à travers la vie de ceux qui l'habitent. »</blockquote>
+                  <blockquote className="mt-6 border-l-2 border-sun pl-4 font-display text-lg italic text-cream/90">« Zem Zem nous fait découvrir le Bénin de l'intérieur, à travers la vie de ceux qui l'habitent. »</blockquote>
                 </div>
               </article>
 

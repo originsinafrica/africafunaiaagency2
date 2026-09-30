@@ -12,8 +12,8 @@
       "capability": "requested wording",
       "source": "current project",
       "outcome": "Rename Zemzem to Zem Zem",
-      "status": "in_progress",
-      "next_action": "Apply and verify wording change"
+      "status": "implemented",
+      "next_action": "Verify wording change in preview"
     }
   ]
 }
