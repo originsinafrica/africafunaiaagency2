@@ -12,3 +12,7 @@
 - [x] Remplacer le visuel « Un même pays » par les trois statues
 - [x] Vérifier les nouvelles retouches sur ordinateur et mobile
 - [x] Écrire « Zem Zem » partout dans le contenu visible
+- [x] Importer la nouvelle version depuis GitHub (africafunaiagency)
+- [x] Réintégrer les 4 images (Sam, Sam et les Trésors, trois statues, tabouret)
+- [x] Réappliquer la correction « Zem Zem »
+- [x] Vérifier le rendu sur ordinateur et mobile
