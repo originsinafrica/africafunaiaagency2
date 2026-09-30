@@ -10,5 +10,5 @@
 - [x] Améliorer la lisibilité des encadrés Zem Zem et Les Trésors
 - [x] Retirer AAA des fiches conseillers et harmoniser la fiche de Fleur
 - [x] Remplacer le visuel « Un même pays » par les trois statues
-- [ ] Vérifier les nouvelles retouches sur ordinateur et mobile
+- [x] Vérifier les nouvelles retouches sur ordinateur et mobile
 - [x] Écrire « Zem Zem » partout dans le contenu visible
